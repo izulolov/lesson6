@@ -93,17 +93,13 @@ class Train
 
   # Может прицеплять вагоны
   def add_wagon!(wagon)
-    if speed.zero?
-      @wagon_count += 1
-      all_wagon.push(wagon)
-    end
+    @wagon_count += 1
+    all_wagon.push(wagon)
   end
 
   # Может отцеплять вагоны
   def remove_wagon!
-    if speed.zero?
-      @wagon_count -= 1
-    end
+    @wagon_count -= 1
   end
 
   # Может принимать маршрут следования (объект класса Route).

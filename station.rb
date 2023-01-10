@@ -36,7 +36,7 @@ class Station
   def valid?
     validate!
     true
-  rescue StandardError
+  rescue
     false
   end
 
@@ -54,7 +54,7 @@ class Station
 
   # Метод отдающий кол-во по типу
   def count_trains_by(type)
-    trains.count { |x| x.type == type }
+    puts "Кол-во поездов типа #{type}: #{trains.count { |x| x.type == type }}"
   end
 
   private

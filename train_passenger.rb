@@ -1,7 +1,7 @@
 require_relative 'train'
 
 class TrainPassenger < Train
-  
+
   def initialize(number)
     super(number, type = 'Passenger')
   end

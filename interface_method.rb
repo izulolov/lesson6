@@ -30,14 +30,14 @@ class InterfaceMethod
     puts 'Введите название станции'
     name = gets.chomp
     @stations << Station.new(name)
-    puts "Создана станция #{name}"
+    puts "Создана станция #{name}" if @stations[-1].valid?
   end
 
   # Создать поезд
   def create_trains
     attempt = 0
     begin
-      puts 'С каким номер создать поезд?'
+      puts 'С каким номер создать поезд? Формат: 3 буквы/цифры, не-ный дефис и еще 2 буквы/цифры. Например: RUS-95'
       number = gets.chomp
       puts '1 - пассажирский, 2 - грузовой'
       select = gets.chomp.to_i
@@ -162,7 +162,11 @@ class InterfaceMethod
       if train.nil?
         puts 'Поезда с таким номером нет'
       else
-        train.add_wagon(WAGON_TYPES[train.type].new)
+        if train.speed.zero?
+          train.add_wagon(WAGON_TYPES[train.type].new)
+        else
+          puts 'Находу нельзя добавить вагон к поезду'
+        end
       end
     end
   end
@@ -179,6 +183,8 @@ class InterfaceMethod
         puts 'Поезда с таким номером нет'
       elsif train.all_wagon.empty?
         puts 'У этого поезда и так нет вагонов'
+      elsif !train.speed.zero?
+        puts 'Находу нельзя удалить вагоны!'
       else
         train.remove_wagon
       end
@@ -204,8 +210,10 @@ class InterfaceMethod
       case move
       when 1 # Вперед
         train.move_to_next_station
+        puts "На станцию #{@stations[train.station_index].name} прибыль поезд с номером #{train.number}"
       when 2 # Назад
         train.move_to_prev_station
+        puts "На станцию #{@stations[train.station_index].name} прибыль поезд с номером #{train.number}"
       else
         puts 'Надо было выбрать 1 или 2'
       end
