@@ -17,14 +17,14 @@ class Train
   def initialize(number, type)
     @number = number
     @type = type
+    validate!
     @all_wagon = []
     @wagon_count = 0
     @speed = 0
     @route = nil
     @station_index = nil
     @@all_trains << self
-    validate!
-    #register_instance
+    register_instance
   end
 
   def valid?

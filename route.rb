@@ -7,9 +7,9 @@ class Route
   def initialize(from, to)
     @from = from
     @to = to
-    @stations = [@from, @to]
     validate!
-    #register_instance
+    @stations = [@from, @to]
+    register_instance
   end
 
   def valid?

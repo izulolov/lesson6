@@ -6,7 +6,7 @@ class Station
   attr_reader :name, :trains
 
   NAME_FORMAT = /^[а-яё\s]{3,}$/i
-
+  validate!
   # Создаем массив класса
   @@all_stations = []
 
@@ -19,7 +19,7 @@ class Station
     validate!
     @trains = []
     @@all_stations << name
-    #register_instance
+    register_instance
   end
 
   # Может принимать поезда (по одному за раз)
